@@ -70,14 +70,14 @@ export default function TaskModal({ task, columnId, order, onClose, onSaved }: T
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6">
+      <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-lg mx-4 p-6">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-xl font-bold text-gray-900">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
             {isEdit ? 'Edit Task' : 'New Task'}
           </h2>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -85,7 +85,7 @@ export default function TaskModal({ task, columnId, order, onClose, onSaved }: T
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="task-title" className="block text-sm font-medium text-gray-700 mb-1.5">
+            <label htmlFor="task-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
               Title
             </label>
             <input
@@ -94,13 +94,13 @@ export default function TaskModal({ task, columnId, order, onClose, onSaved }: T
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="What needs to be done?"
-              className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow"
               autoFocus
             />
           </div>
 
           <div>
-            <label htmlFor="task-desc" className="block text-sm font-medium text-gray-700 mb-1.5">
+            <label htmlFor="task-desc" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
               Description
             </label>
             <textarea
@@ -109,13 +109,13 @@ export default function TaskModal({ task, columnId, order, onClose, onSaved }: T
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Add more details..."
               rows={3}
-              className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow resize-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow resize-none"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="task-priority" className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label htmlFor="task-priority" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Priority
               </label>
               <select
@@ -132,7 +132,7 @@ export default function TaskModal({ task, columnId, order, onClose, onSaved }: T
             </div>
 
             <div>
-              <label htmlFor="task-label" className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label htmlFor="task-label" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                 Label
               </label>
               <input
@@ -141,13 +141,13 @@ export default function TaskModal({ task, columnId, order, onClose, onSaved }: T
                 value={label}
                 onChange={(e) => setLabel(e.target.value)}
                 placeholder="e.g., frontend"
-                className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow"
+                className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="task-due" className="block text-sm font-medium text-gray-700 mb-1.5">
+            <label htmlFor="task-due" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
               Due Date
             </label>
             <input
@@ -177,7 +177,7 @@ export default function TaskModal({ task, columnId, order, onClose, onSaved }: T
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
                 Cancel
               </button>

@@ -32,12 +32,12 @@ export default function CreateBoardModal({ onClose, onCreated }: CreateBoardModa
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+      <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
         <div className="flex items-center justify-between mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Create New Board</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Create New Board</h2>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -45,7 +45,7 @@ export default function CreateBoardModal({ onClose, onCreated }: CreateBoardModa
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="board-title" className="block text-sm font-medium text-gray-700 mb-1.5">
+            <label htmlFor="board-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
               Board Title
             </label>
             <input
@@ -54,14 +54,14 @@ export default function CreateBoardModal({ onClose, onCreated }: CreateBoardModa
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g., Product Roadmap"
-              className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow"
               autoFocus
             />
           </div>
 
           <div>
-            <label htmlFor="board-desc" className="block text-sm font-medium text-gray-700 mb-1.5">
-              Description <span className="text-gray-400">(optional)</span>
+            <label htmlFor="board-desc" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              Description <span className="text-gray-400 dark:text-gray-500">(optional)</span>
             </label>
             <textarea
               id="board-desc"
@@ -69,7 +69,7 @@ export default function CreateBoardModal({ onClose, onCreated }: CreateBoardModa
               onChange={(e) => setDescription(e.target.value)}
               placeholder="What is this board for?"
               rows={3}
-              className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow resize-none"
+              className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3.5 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow resize-none"
             />
           </div>
 
@@ -77,7 +77,7 @@ export default function CreateBoardModal({ onClose, onCreated }: CreateBoardModa
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+              className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
               Cancel
             </button>

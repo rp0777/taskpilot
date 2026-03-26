@@ -45,7 +45,7 @@ export default function TaskCard({ task, onClick }: TaskCardProps) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`group bg-white rounded-lg border border-gray-200 p-3 cursor-pointer hover:shadow-md hover:border-indigo-200 transition-all duration-150 ${
+      className={`group bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-3 cursor-pointer hover:shadow-md hover:border-indigo-200 dark:hover:border-indigo-700 transition-all duration-150 ${
         isDragging ? 'opacity-50 shadow-lg rotate-2 scale-105' : ''
       }`}
       onClick={onClick}
@@ -60,9 +60,9 @@ export default function TaskCard({ task, onClick }: TaskCardProps) {
           <GripVertical className="h-4 w-4" />
         </button>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 leading-snug">{task.title}</p>
+          <p className="text-sm font-medium text-gray-900 dark:text-gray-100 leading-snug">{task.title}</p>
           {task.description && (
-            <p className="mt-1 text-xs text-gray-500 line-clamp-2">{task.description}</p>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-2">{task.description}</p>
           )}
           <div className="mt-2 flex items-center flex-wrap gap-1.5">
             <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${priority.color}`}>

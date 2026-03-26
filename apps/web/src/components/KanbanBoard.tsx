@@ -249,7 +249,7 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
     return (
       <div className="flex items-center justify-center h-[calc(100vh-64px)]">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-gray-900">Board not found</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Board not found</h2>
           <button
             onClick={() => router.push('/')}
             className="mt-4 text-indigo-600 hover:text-indigo-500 font-medium"
@@ -263,18 +263,18 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
 
   return (
     <div className="flex flex-col h-[calc(100vh-64px)]">
-      <div className="flex items-center justify-between gap-4 px-6 py-4 border-b border-gray-200 bg-white">
+      <div className="flex items-center justify-between gap-4 px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
         <div className="flex items-center gap-4">
           <button
             onClick={() => router.push('/')}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">{board.title}</h1>
+            <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">{board.title}</h1>
             {board.description && (
-              <p className="text-sm text-gray-500">{board.description}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{board.description}</p>
             )}
           </div>
         </div>
@@ -316,13 +316,13 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
           {/* Add Column */}
           <div className="w-72 shrink-0">
             {isAddingColumn ? (
-              <div className="bg-gray-100 rounded-xl p-3 space-y-2">
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-3 space-y-2">
                 <input
                   type="text"
                   value={newColumnTitle}
                   onChange={(e) => setNewColumnTitle(e.target.value)}
                   placeholder="Column title..."
-                  className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-3 py-2 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   autoFocus
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') handleAddColumn();
@@ -345,7 +345,7 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
                       setIsAddingColumn(false);
                       setNewColumnTitle('');
                     }}
-                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-200 transition-colors"
+                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                   >
                     Cancel
                   </button>
@@ -354,7 +354,7 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
             ) : (
               <button
                 onClick={() => setIsAddingColumn(true)}
-                className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-gray-300 p-4 text-sm font-medium text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50/50 transition-colors"
+                className="w-full flex items-center justify-center gap-2 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 p-4 text-sm font-medium text-gray-500 dark:text-gray-400 hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/30 transition-colors"
               >
                 <Plus className="h-4 w-4" />
                 Add Column

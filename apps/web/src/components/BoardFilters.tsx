@@ -41,7 +41,7 @@ export default function BoardFilters({
             onFiltersChange({ ...filters, search: e.target.value })
           }
           placeholder="Search tasks..."
-          className="rounded-lg border border-gray-300 bg-white pl-9 pr-3 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent w-56"
+          className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 pl-9 pr-3 py-1.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent w-56"
         />
       </div>
 
@@ -53,7 +53,7 @@ export default function BoardFilters({
           onChange={(e) =>
             onFiltersChange({ ...filters, priority: e.target.value })
           }
-          className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-1.5 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         >
           <option value="">All Priorities</option>
           <option value="LOW">Low</option>
@@ -70,7 +70,7 @@ export default function BoardFilters({
           onChange={(e) =>
             onFiltersChange({ ...filters, label: e.target.value })
           }
-          className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-1.5 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         >
           <option value="">All Labels</option>
           {labels.map((label) => (
@@ -84,12 +84,12 @@ export default function BoardFilters({
       {/* Task count & clear */}
       {hasActiveFilters && (
         <>
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-gray-500 dark:text-gray-400">
             {matchingTasks} of {totalTasks} tasks
           </span>
           <button
             onClick={clearFilters}
-            className="inline-flex items-center gap-1 rounded-lg bg-gray-100 px-2.5 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center gap-1 rounded-lg bg-gray-100 dark:bg-gray-800 px-2.5 py-1.5 text-xs font-medium text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
             <X className="h-3 w-3" />
             Clear filters

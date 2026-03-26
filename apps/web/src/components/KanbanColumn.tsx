@@ -73,18 +73,18 @@ export default function KanbanColumn({ column, onRefresh }: KanbanColumnProps) {
                   setIsEditingTitle(false);
                 }
               }}
-              className="text-sm font-semibold text-gray-700 bg-white border border-indigo-300 rounded px-2 py-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="text-sm font-semibold text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-indigo-300 rounded px-2 py-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               autoFocus
             />
           ) : (
             <h3
-              className="text-sm font-semibold text-gray-700 uppercase tracking-wide cursor-pointer hover:text-indigo-600 transition-colors"
+              className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide cursor-pointer hover:text-indigo-600 transition-colors"
               onDoubleClick={() => setIsEditingTitle(true)}
             >
               {column.title}
             </h3>
           )}
-          <span className="inline-flex items-center justify-center h-5 min-w-[20px] rounded-full bg-gray-200 px-1.5 text-xs font-medium text-gray-600">
+          <span className="inline-flex items-center justify-center h-5 min-w-[20px] rounded-full bg-gray-200 dark:bg-gray-700 px-1.5 text-xs font-medium text-gray-600 dark:text-gray-400">
             {tasks.length}
           </span>
         </div>
@@ -92,20 +92,20 @@ export default function KanbanColumn({ column, onRefresh }: KanbanColumnProps) {
         <div className="relative">
           <button
             onClick={() => setShowMenu(!showMenu)}
-            className="p-1 rounded text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            className="p-1 rounded text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           >
             <MoreHorizontal className="h-4 w-4" />
           </button>
           {showMenu && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setShowMenu(false)} />
-              <div className="absolute right-0 z-20 mt-1 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-1">
+              <div className="absolute right-0 z-20 mt-1 w-40 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1">
                 <button
                   onClick={() => {
                     setIsEditingTitle(true);
                     setShowMenu(false);
                   }}
-                  className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                  className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                 >
                   <Edit3 className="h-3.5 w-3.5" />
                   Rename
@@ -115,7 +115,7 @@ export default function KanbanColumn({ column, onRefresh }: KanbanColumnProps) {
                     handleDeleteColumn();
                     setShowMenu(false);
                   }}
-                  className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+                  className="flex w-full items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                   Delete
@@ -130,8 +130,8 @@ export default function KanbanColumn({ column, onRefresh }: KanbanColumnProps) {
         ref={setNodeRef}
         className={`flex-1 rounded-xl p-2 space-y-2 min-h-[120px] transition-colors duration-200 ${
           isOver
-            ? 'bg-indigo-50 ring-2 ring-indigo-300 ring-inset'
-            : 'bg-gray-100/80'
+            ? 'bg-indigo-50 dark:bg-indigo-950/30 ring-2 ring-indigo-300 dark:ring-indigo-700 ring-inset'
+            : 'bg-gray-100/80 dark:bg-gray-800/50'
         }`}
       >
         <SortableContext items={taskIds} strategy={verticalListSortingStrategy}>
@@ -146,7 +146,7 @@ export default function KanbanColumn({ column, onRefresh }: KanbanColumnProps) {
 
         <button
           onClick={() => setShowTaskModal(true)}
-          className="w-full flex items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-gray-300 py-2 text-sm text-gray-500 hover:border-indigo-400 hover:text-indigo-600 hover:bg-white transition-colors"
+          className="w-full flex items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 py-2 text-sm text-gray-500 dark:text-gray-400 hover:border-indigo-400 hover:text-indigo-600 hover:bg-white dark:hover:bg-gray-800 transition-colors"
         >
           <Plus className="h-4 w-4" />
           Add Task
