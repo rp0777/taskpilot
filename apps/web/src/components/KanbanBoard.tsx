@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import {
   DndContext,
   DragEndEvent,
@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { Board, Column, Task, getBoard, createColumn, moveTask } from '@/lib/api';
 import KanbanColumn from './KanbanColumn';
 import TaskCard from './TaskCard';
+import BoardFilters, { FilterState } from './BoardFilters';
 
 interface KanbanBoardProps {
   boardId: string;
@@ -30,6 +31,7 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
+  const [filters, setFilters] = useState<FilterState>({ search: '', priority: '', label: '' });
   const router = useRouter();
 
   const sensors = useSensors(
@@ -57,6 +59,53 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
   useEffect(() => {
     fetchBoard();
   }, [fetchBoard]);
+
+  // Collect all unique labels across all tasks
+  const allLabels = useMemo(() => {
+    const labelSet = new Set<string>();
+    columns.forEach(col =>
+      col.tasks?.forEach(task => {
+        if (task.label) labelSet.add(task.label);
+      })
+    );
+    return Array.from(labelSet).sort();
+  }, [columns]);
+
+  // Count total and matching tasks
+  const totalTasks = useMemo(
+    () => columns.reduce((sum, col) => sum + (col.tasks?.length || 0), 0),
+    [columns]
+  );
+
+  const taskMatchesFilter = useCallback(
+    (task: Task): boolean => {
+      if (filters.search) {
+        const query = filters.search.toLowerCase();
+        const matchesTitle = task.title.toLowerCase().includes(query);
+        const matchesDesc = task.description?.toLowerCase().includes(query) ?? false;
+        if (!matchesTitle && !matchesDesc) return false;
+      }
+      if (filters.priority && task.priority !== filters.priority) return false;
+      if (filters.label && task.label !== filters.label) return false;
+      return true;
+    },
+    [filters]
+  );
+
+  // Build filtered columns — tasks that don't match are hidden
+  const filteredColumns = useMemo(() => {
+    const hasActiveFilter = filters.search || filters.priority || filters.label;
+    if (!hasActiveFilter) return columns;
+    return columns.map(col => ({
+      ...col,
+      tasks: col.tasks?.filter(taskMatchesFilter) || [],
+    }));
+  }, [columns, filters, taskMatchesFilter]);
+
+  const matchingTasks = useMemo(
+    () => filteredColumns.reduce((sum, col) => sum + (col.tasks?.length || 0), 0),
+    [filteredColumns]
+  );
 
   const handleAddColumn = async () => {
     if (!newColumnTitle.trim()) return;
@@ -214,19 +263,28 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
 
   return (
     <div className="flex flex-col h-[calc(100vh-64px)]">
-      <div className="flex items-center gap-4 px-6 py-4 border-b border-gray-200 bg-white">
-        <button
-          onClick={() => router.push('/')}
-          className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </button>
-        <div>
-          <h1 className="text-xl font-bold text-gray-900">{board.title}</h1>
-          {board.description && (
-            <p className="text-sm text-gray-500">{board.description}</p>
-          )}
+      <div className="flex items-center justify-between gap-4 px-6 py-4 border-b border-gray-200 bg-white">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => router.push('/')}
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">{board.title}</h1>
+            {board.description && (
+              <p className="text-sm text-gray-500">{board.description}</p>
+            )}
+          </div>
         </div>
+        <BoardFilters
+          filters={filters}
+          onFiltersChange={setFilters}
+          labels={allLabels}
+          totalTasks={totalTasks}
+          matchingTasks={matchingTasks}
+        />
       </div>
 
       <div className="flex-1 overflow-x-auto overflow-y-hidden p-6">
@@ -238,7 +296,7 @@ export default function KanbanBoard({ boardId }: KanbanBoardProps) {
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
           >
-            {columns.map(column => (
+            {filteredColumns.map(column => (
               <KanbanColumn
                 key={column.id}
                 column={column}
