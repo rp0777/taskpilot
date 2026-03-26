@@ -45,6 +45,7 @@ jobs:
             --platform=managed \
             --allow-unauthenticated \
             --port=4000 \
+            --service-account=cloud-run-sa@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com \
             --set-env-vars="DATABASE_URL=${{ secrets.DATABASE_URL }},API_PORT=4000" \
             --min-instances=1 \
             --max-instances=10 \
@@ -100,6 +101,7 @@ jobs:
             --platform=managed \
             --allow-unauthenticated \
             --port=3000 \
+            --service-account=cloud-run-sa@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com \
             --set-env-vars="NEXT_PUBLIC_API_URL=${{ needs.deploy-api.outputs.api_url }}" \
             --min-instances=1 \
             --max-instances=10 \
