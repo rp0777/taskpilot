@@ -1,0 +1,27 @@
+name: Task
+description: A development task
+labels: ["task", "agent:dev"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+    validations:
+      required: true
+  - type: textarea
+    id: technical
+    attributes:
+      label: Technical Details
+      description: Implementation notes, affected files, etc.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Frontend
+        - Backend
+        - Database
+        - DevOps
+        - Full Stack
+    validations:
+      required: true

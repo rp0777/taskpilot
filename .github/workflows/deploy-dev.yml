@@ -1,0 +1,38 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  deploy-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build frontend
+        run: npm run build --workspace=apps/web
+
+      - name: Build backend
+        run: npm run build --workspace=apps/api
+
+      - name: Deploy frontend
+        run: echo "Deploying frontend to dev environment (replace with Vercel/Railway CLI)"
+
+      - name: Deploy backend
+        run: echo "Deploying backend to dev environment (replace with Vercel/Railway CLI)"
+
+      - name: Tag deployment
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          echo "Tagged as dev-${SHORT_SHA}"
+          git tag "dev-${SHORT_SHA}"
+          git push origin "dev-${SHORT_SHA}"
