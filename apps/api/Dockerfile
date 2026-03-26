@@ -1,9 +1,9 @@
 # Stage 1: Install dependencies
 FROM node:20-alpine AS deps
 WORKDIR /app
-COPY package.json package-lock.json* ./
+COPY package.json ./
 COPY prisma ./prisma/
-RUN npm ci
+RUN npm install --production=false
 RUN npx prisma generate
 
 # Stage 2: Build
